@@ -1,11 +1,13 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Searching {
 
     public static void main(String[] args) {
-        // The program below is meant for testing the search algorithms you'll write
+
         Scanner scanner = new Scanner(System.in);
         ArrayList<Book> books = new ArrayList<>();
         System.out.println("How many books to create?");
@@ -44,10 +46,28 @@ public class Searching {
     }
 
     public static int linearSearch(ArrayList<Book> books, int searchedId) {
+        for(int i=0 ; i < books.size() ; i++){
+            if(searchedId == books.get(i).getId()){
+                return i;
+            }
+        }
         return -1;
     }
 
     public static int binarySearch(ArrayList<Book> books, long searchedId) {
+        int first = 0;
+        int last = books.size() - 1;
+        while(first <= last){
+            int middle = (first + last) / 2;
+            if(books.get(middle).getId() == searchedId){
+                return middle;
+            } else if(books.get(middle).getId() < searchedId){
+                first = middle + 1;
+            } else {
+                last = middle - 1;
+            }
+            
+        }
         return -1;
     }
 }
